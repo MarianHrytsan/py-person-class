@@ -8,16 +8,10 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    result_output = []
+    result_output = [Person(person["name"], person["age"]) for i, person in enumerate(people)]
     for i, person in enumerate(people):
-        result_output.append(Person(person["name"], person["age"]))
-    for i, person in enumerate(people):
-        if "wife" in person:
-            for j in range(len(result_output)):
-                if person["wife"] == result_output[j].name:
-                    result_output[i].wife = result_output[j]
-        elif "husband" in person:
-            for j in range(len(result_output)):
-                if person["husband"] == result_output[j].name:
-                    result_output[i].husband = result_output[j]
+        if person.get("wife"):
+            result_output[i].wife = Person.people[person["wife"]]
+        elif person.get("husband"):
+            result_output[i].husband = Person.people[person["husband"]]
     return result_output
