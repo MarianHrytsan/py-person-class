@@ -8,7 +8,8 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    result_output = [Person(person["name"], person["age"]) for i, person in enumerate(people)]
+    Person.people.clear()
+    result_output = [Person(person["name"], person["age"]) for person in people]
     for i, person in enumerate(people):
         if person.get("wife"):
             result_output[i].wife = Person.people[person["wife"]]
